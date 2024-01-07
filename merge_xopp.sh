@@ -1,7 +1,10 @@
 #!/bin/bash
 
-tmp_folder=".xopp_merge_tmp"
+first_xopp_file=$(ls *.xopp | head -n 1)
+
+tmp_folder=".simple-xopp-merger_${first_xopp_file%.xopp}"
 mkdir $tmp_folder
+echo "Created temporary folder $tmp_folder"
 
 # Create a xml.gz replica for each .xopp file of the current folder
 for file in *.xopp; do
@@ -12,15 +15,17 @@ for file in *.xopp; do
     fi
 done
 
+cd $tmp_folder
+
 # Decompress all .gz files
-for file in $tmp_folder/*.gz; do
+for file in *.gz; do
     if [ -e "$file" ]; then
         gzip -d "$file"
         echo "Decompressed $file"
     fi
 done
 
-output_file="merged_xopp.xml"
+output_file="${first_xopp_file%.xopp}_merged"
 
 # Create a new xournal file with the common head
 echo '<?xml version="1.0" standalone="no"?>' >> "$output_file"
@@ -32,7 +37,7 @@ echo '<preview></preview>' >> "$output_file"
 # so we don't need to worry about it
 
 # Iterate over each .xml file
-for file in $tmp_folder/*.xml; do
+for file in *.xml; do
     if [ -e "$file" ]; then
         # Extract the content between the first <page> and the last </page>
         echo '<!-- content from $file -->' >> "$output_file" 
@@ -45,10 +50,11 @@ echo '</xournal>' >> "$output_file"
 
 
 gzip $output_file 
-mv "$output_file.gz" "${output_file%.xml}.xopp"
+mv --backup=numbered "$output_file.gz" "../${output_file}.xopp"
 echo "Generated ${output_file%.xml}.xopp"
 
 # remove tmp files
+cd ..
 rm -r $tmp_folder
 echo "Removed $tmp_folder"
 
