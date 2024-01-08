@@ -6,9 +6,10 @@ A simple shell script that merges all Xoural++ files (with `.xopp` file extensio
 2. Put `merge-xopp.sh` in the folder containing the `.xopp` files to merge.
 3. Run `./merge-xopp.sh` in the folder containing the `.xopp` files to merge them into a single `.xopp` file.
 
-# limitation
-The order of the merged files is based on the order of the files in the folder. 
+# Limitation
+- The order of the merged files is based on the order of the files in the folder. 
 If you want to change the order, you need to rename the files to change the order.
+- The script doesn't handle notes with pdf.
 
 # Notes
 This is a helper script for the note taking app [Xournal++](https://github.com/xournalpp/xournalpp)
