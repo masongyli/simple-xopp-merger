@@ -3,7 +3,8 @@ A simple shell script that merges all Xoural++ files (with `.xopp` file extensio
 
 # Usage
 1. Make sure `merge-xopp.sh` is executable. If not, run `chmod +x merge_xopp.sh`.
-2. Run `./merge-xopp.sh` in the folder containing the `.xopp` files to merge them into a single `.xopp` file.
+2. Put `merge-xopp.sh` in the folder containing the `.xopp` files to merge.
+3. Run `./merge-xopp.sh` in the folder containing the `.xopp` files to merge them into a single `.xopp` file.
 
 # limitation
 The order of the merged files is based on the order of the files in the folder. 
