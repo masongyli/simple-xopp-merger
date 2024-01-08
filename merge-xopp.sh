@@ -3,7 +3,7 @@
 first_xopp_file=$(ls *.xopp | head -n 1)
 
 tmp_folder=".simple-xopp-merger_${first_xopp_file%.xopp}"
-mkdir $tmp_folder
+mkdir "$tmp_folder"
 echo "Created temporary folder $tmp_folder"
 
 # Create a xml.gz replica for each .xopp file of the current folder
@@ -15,7 +15,7 @@ for file in *.xopp; do
     fi
 done
 
-cd $tmp_folder
+cd "$tmp_folder"
 
 # Decompress all .gz files
 for file in *.gz; do
@@ -49,13 +49,13 @@ done
 echo '</xournal>' >> "$output_file"
 
 
-gzip $output_file 
+gzip "$output_file"
 mv --backup=numbered "$output_file.gz" "../${output_file}.xopp"
 echo "Generated ${output_file%.xml}.xopp"
 
 # remove tmp files
 cd ..
-rm -r $tmp_folder
+rm -r "$tmp_folder"
 echo "Removed $tmp_folder"
 
 echo "Done"
