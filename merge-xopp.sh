@@ -40,7 +40,7 @@ echo '<preview></preview>' >> "$output_file"
 for file in *.xml; do
     if [ -e "$file" ]; then
         # Extract the content between the first <page> and the last </page>
-        echo '<!-- content from $file -->' >> "$output_file" 
+        echo "<!-- content from $file -->" >> "$output_file" 
         sed -n '/<page/,/<\/page>/p' "$file" >> "$output_file"
         echo "Appended the page content of $file to $output_file"
     fi
