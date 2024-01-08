@@ -27,14 +27,8 @@ done
 
 output_file="${first_xopp_file%.xopp}_merged"
 
-# Create a new xournal file with the common head
-echo '<?xml version="1.0" standalone="no"?>' >> "$output_file"
-echo '<xournal creator="Xournal++ 1.2.2" fileversion="4">' >> "$output_file"
-echo '<title>Xournal++ document - see https://github.com/xournalpp/xournalpp</title>' >> "$output_file"
-echo '<preview></preview>' >> "$output_file"
-# content in the <preview> tag is the base64 image encoding of the first page of the document
-# Whenever we execute "save file" in Xournal++, the content of preview is updated
-# so we don't need to worry about it
+# Add the common header to the output file
+sed -n '/<page/q;p' "${first_xopp_file%.xopp}.xml" >> "$output_file"
 
 # Iterate over each .xml file
 for file in *.xml; do
