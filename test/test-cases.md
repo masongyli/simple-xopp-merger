@@ -1,0 +1,3 @@
+- test 1: merge 2 files
+- test 2: merge 2 files (file names contain white spaces)
+- test 3: merge 3 files
