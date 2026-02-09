@@ -24,8 +24,13 @@ for file in *.gz; do
         echo "Decompressed $file"
     fi
 done
-
-output_file="${first_xopp_file%.xopp}_merged"
+if [ -n "$1" ]; then
+    output_file="$1"
+    echo "cli argument given. Using $1 as output file name"
+else
+    output_file="${first_xopp_file%.xopp}_merged"
+    echo "No cli argument given. Using ${first_xopp_file%.xopp}_merged as output file name"
+fi
 
 # Add the common header to the output file
 sed -n '/<page/q;p' "${first_xopp_file%.xopp}.xml" >> "$output_file"
